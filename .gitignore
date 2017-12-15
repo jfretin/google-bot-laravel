@@ -1,0 +1,7 @@
+vendor
+.idea
+composer.phar
+.vagrant
+docs/.build
+.env
+coverage

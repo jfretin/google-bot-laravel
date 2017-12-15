@@ -1,0 +1,27 @@
+{
+  "name": "tudor2004/google-bot-laravel",
+  "description": "Google Chat Bot for Laravel",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tudor-Dan Ravoiu",
+      "email": "tudor2004@yahoo.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Tudorica\\GoogleBot\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Tudorica\\GoogleBot\\GoogleBotServiceProvider"
+      ],
+      "aliases": {
+        "GoogleBot": "Tudorica\\GoogleBot\\Facades\\GoogleBotFacade"
+      }
+    }
+  }
+}
