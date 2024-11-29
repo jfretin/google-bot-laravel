@@ -2,13 +2,13 @@
 
 namespace Tudorica\GoogleBot\Services;
 
+use Tudorica\GoogleBot\Factories\BotFactory;
 use Tudorica\GoogleBot\Contracts\BotContract;
+use Tudorica\GoogleBot\Exceptions\BotException;
 use Tudorica\GoogleBot\Contracts\CommandContract;
 use Tudorica\GoogleBot\Exceptions\BotCannotRunCommandException;
-use Tudorica\GoogleBot\Exceptions\BotException;
-use Tudorica\GoogleBot\Exceptions\BotNoCommandsRegisteredException;
 use Tudorica\GoogleBot\Exceptions\BotUnauthorizedUserException;
-use Tudorica\GoogleBot\Factories\BotFactory;
+use Tudorica\GoogleBot\Exceptions\BotNoCommandsRegisteredException;
 
 class BotService
 {
@@ -34,7 +34,7 @@ class BotService
      */
     public function run(string $botClass, array $data): array
     {
-        $this->data = $data;
+        $this->data = $data['message'];
 
         $this->bot = app(BotFactory::class)->make($botClass);
 
@@ -163,7 +163,7 @@ class BotService
             try {
                 $command = app($botCommand);
 
-                if ($command instanceof CommandContract && preg_match('/' . $command->name() . '/', $commandName) === 1) {
+                if ($command instanceof CommandContract && preg_match('#' . $command->name() . '#i', $commandName) === 1) {
                     return $command;
                 }
             } catch (\Throwable $ex) {
